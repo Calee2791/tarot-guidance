@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calee's Sacred Tarot Guidance</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel Decorative & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cosmic: {
+                            900: '#0B0A16',
+                            800: '#141226',
+                            700: '#1F1B38',
+                            600: '#2A244D',
+                            accent: '#D4AF37', // Mystic Gold
+                            goldHover: '#F3E5AB',
+                            purpleGlow: '#7C4DFF',
+                            softViolet: '#A78BFA'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cinzel Decorative"', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0B0A16;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(124, 77, 255, 0.15) 0%, transparent 70%),
+                radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+            color: #E2E8F0;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF099 0%, #D4AF37 50%, #AA7C11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-button {
+            background: linear-gradient(135deg, #D4AF37 0%, #997415 100%);
+            color: #0B0A16;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .gold-button:hover {
+            background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 100%);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* 3D Card Flip Animation */
+        .card-container {
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .card-inner.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+
+        .card-back {
+            background: linear-gradient(145deg, #1A1633, #0F0C21);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+
+        .card-front {
+            background: #141226;
+            border: 2px solid rgba(212, 175, 55, 0.6);
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(124, 77, 255, 0.2);
+        }
+
+        /* Sacred Geometry Pattern Overlay for Card Back */
+        .sacred-pattern {
+            background-image: radial-gradient(circle, rgba(212,175,55,0.15) 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0A16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A244D;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header Section -->
+    <header class="border-b border-cosmic-700/60 bg-cosmic-900/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3 text-center md:text-left">
+                <div class="w-10 h-10 rounded-full bg-cosmic-700 border border-cosmic-accent/50 flex items-center justify-center text-cosmic-accent shadow-md">
+                    <i class="fa-solid font-serif text-xl">✨</i>
+                </div>
+                <div>
+                    <h1 class="font-serif text-xl md:text-2xl font-bold tracking-wider gold-gradient-text">CALEE'S SACRED GUIDANCE</h1>
+                    <p class="text-xs text-cosmic-softViolet tracking-widest uppercase">Reflective Tarot & Self-Discovery</p>
+                </div>
+            </div>
+            
+            <a href="mailto:caleeshealinginfo@gmail.com?subject=Live%20Tarot%20Session%20Booking" 
+               class="px-4 py-2 text-xs md:text-sm rounded-full border border-cosmic-accent/50 text-cosmic-accent hover:bg-cosmic-accent/10 transition-colors flex items-center gap-2">
+                <i class="fa-regular fa-envelope"></i>
+                <span>Book Live Session ($40)</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-8 w-full">
+
+        <!-- Introduction Banner -->
+        <section class="text-center max-w-2xl mx-auto mb-10">
+            <h2 class="font-serif text-2xl md:text-3xl font-semibold mb-3 text-slate-100">Mirror for the Soul</h2>
+            <p class="text-sm md:text-base text-slate-300 leading-relaxed font-light">
+                Tarot is a gentle tool for insight, self-reflection, and personal clarity. Our spreads offer thoughtful guidance to help you navigate your current energy—never predictions of an unwritten future.
+            </p>
+        </section>
+
+        <!-- Spread Selection Cards Section -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            
+            <!-- FREE TIER: Daily 1-Card Pull -->
+            <div class="bg-cosmic-800/60 rounded-2xl p-6 gold-border flex flex-col justify-between relative overflow-hidden backdrop-blur-sm hover:border-cosmic-accent/60 transition-all">
+                <div class="absolute top-3 right-3 bg-cosmic-700 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-medium border border-emerald-500/30">
+                    Free Daily
+                </div>
+                <div>
+                    <div class="text-cosmic-accent text-2xl mb-2"><i class="fa-solid fa-sun"></i></div>
+                    <h3 class="font-serif text-xl font-bold mb-1 text-slate-100">Daily Insight</h3>
+                    <p class="text-xs text-cosmic-softViolet mb-4">1-Card Reflection</p>
+                    <p class="text-sm text-slate-300 mb-6">
+                        Draw a single card to focus your intentions, tune into your inner wisdom, and reflect on today’s energy.
+                    </p>
+                </div>
+
+                <div>
+                    <!-- Message container if pull is already used today -->
+                    <div id="dailyUsedNotice" class="hidden mb-4 p-3 rounded-lg bg-cosmic-900/90 border border-cosmic-accent/30 text-xs text-slate-300">
+                        <p class="text-cosmic-accent font-semibold mb-1"><i class="fa-solid fa-moon mr-1"></i> You've drawn today's card!</p>
+                        <p>Your free daily reflection resets tomorrow. Explore deeper guidance options below.</p>
+                    </div>
+
+                    <button id="btnDailyPull" onclick="startSpread('daily')" 
+                            class="w-full py-3 rounded-xl gold-button text-sm tracking-wide uppercase">
+                        Draw Free Card
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAID TIER 1: 3-Card Spread -->
+            <div class="bg-cosmic-800/60 rounded-2xl p-6 gold-border flex flex-col justify-between relative overflow-hidden backdrop-blur-sm hover:border-cosmic-accent/60 transition-all">
+                <div class="absolute top-3 right-3 bg-cosmic-accent/20 text-cosmic-accent text-xs px-2.5 py-1 rounded-full font-semibold border border-cosmic-accent/40">
+                    $<span class="price-3card-display">3</span>
+                </div>
+                <div>
+                    <div class="text-cosmic-accent text-2xl mb-2"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3 class="font-serif text-xl font-bold mb-1 text-slate-100">Mind, Body & Spirit</h3>
+                    <p class="text-xs text-cosmic-softViolet mb-4">3-Card Insight Spread</p>
+                    <p class="text-sm text-slate-300 mb-6">
+                        Explore your current position, the underlying challenges, and practical steps for personal growth.
+                    </p>
+                </div>
+
+                <div>
+                    <button id="btnUnlock3Card" onclick="handlePayment('3card')" 
+                            class="w-full py-3 rounded-xl border border-cosmic-accent text-cosmic-accent hover:bg-cosmic-accent hover:text-cosmic-900 transition-all text-sm font-semibold tracking-wide uppercase flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-lock text-xs"></i>
+                        <span>Unlock Spread ($<span class="price-3card-display">3</span>)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAID TIER 2: Large Spread (5 Cards) -->
+            <div class="bg-cosmic-800/60 rounded-2xl p-6 gold-border flex flex-col justify-between relative overflow-hidden backdrop-blur-sm hover:border-cosmic-accent/60 transition-all">
+                <div class="absolute top-3 right-3 bg-cosmic-accent/20 text-cosmic-accent text-xs px-2.5 py-1 rounded-full font-semibold border border-cosmic-accent/40">
+                    $<span class="price-large-display">7</span>
+                </div>
+                <div>
+                    <div class="text-cosmic-accent text-2xl mb-2"><i class="fa-solid fa-compass"></i></div>
+                    <h3 class="font-serif text-xl font-bold mb-1 text-slate-100">Deep Clarity Journey</h3>
+                    <p class="text-xs text-cosmic-softViolet mb-4">5-Card Comprehensive Guidance</p>
+                    <p class="text-sm text-slate-300 mb-6">
+                        A detailed view exploring Root Context, Obstacles, Hidden Strengths, Immediate Focus, and Empowered Wisdom.
+                    </p>
+                </div>
+
+                <div>
+                    <button id="btnUnlockLarge" onclick="handlePayment('large')" 
+                            class="w-full py-3 rounded-xl border border-cosmic-accent text-cosmic-accent hover:bg-cosmic-accent hover:text-cosmic-900 transition-all text-sm font-semibold tracking-wide uppercase flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-lock text-xs"></i>
+                        <span>Unlock Spread ($<span class="price-large-display">7</span>)</span>
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Reading Area (Hidden by default, shown when a reading is active) -->
+        <section id="readingSection" class="hidden bg-cosmic-800/40 rounded-3xl p-6 md:p-8 gold-border mb-12 backdrop-blur-md">
+            <div class="flex justify-between items-center mb-6 border-b border-cosmic-700/50 pb-4">
+                <div>
+                    <h3 id="spreadTitle" class="font-serif text-xl md:text-2xl font-bold gold-gradient-text">Your Spread Reading</h3>
+                    <p id="spreadSubtitle" class="text-xs md:text-sm text-slate-400">Click on each card to reveal its guidance</p>
+                </div>
+                <button onclick="resetReading()" class="text-xs text-slate-400 hover:text-cosmic-accent underline flex items-center gap-1">
+                    <i class="fa-solid fa-rotate-left"></i> Start Over
+                </button>
+            </div>
+
+            <!-- Cards Layout Grid -->
+            <div id="cardsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-center mb-8">
+                <!-- Dynamically populated card elements go here -->
+            </div>
+
+            <!-- Interpretation Summary Area -->
+            <div id="interpretationBox" class="bg-cosmic-900/90 rounded-2xl p-6 border border-cosmic-700 hidden">
+                <h4 class="font-serif text-lg font-semibold text-cosmic-accent mb-2 flex items-center gap-2">
+                    <span>✨ Guidance Summary & Reflections</span>
+                </h4>
+                <div id="interpretationContent" class="text-sm text-slate-300 space-y-3 leading-relaxed">
+                    <!-- Dynamic summary goes here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Reading Promo Section -->
+        <section class="bg-gradient-to-r from-cosmic-800 via-cosmic-700 to-cosmic-800 rounded-2xl p-6 md:p-8 border border-cosmic-accent/30 text-center relative overflow-hidden shadow-2xl">
+            <div class="max-w-2xl mx-auto space-y-4">
+                <span class="text-xs tracking-widest text-cosmic-accent uppercase font-semibold">Personalized Live Readings</span>
+                <h3 class="font-serif text-2xl md:text-3xl font-bold text-slate-100">Looking for Deeper Intuitive Direction?</h3>
+                <p class="text-sm md:text-base text-slate-300 leading-relaxed font-light">
+                    Automated cards offer wonderful daily prompts, but a live reading brings tailored depth to your unique journey. Connect directly with Calee for a compassionate, 1-on-1 session.
+                </p>
+                <div class="inline-block py-2 px-4 rounded-xl bg-cosmic-900/70 border border-cosmic-accent/20 text-cosmic-goldHover font-semibold text-sm my-2">
+                    ✨ Live Tarot Guidance Sessions: <strong>$40 for 30 minutes</strong>
+                </div>
+                <div class="pt-2">
+                    <a href="mailto:caleeshealinginfo@gmail.com?subject=Book%20a%20Live%20Tarot%20Session&body=Hi%20Calee,%20I%20would%20like%20to%20book%20a%2030-minute%20live%20tarot%20guidance%20session!" 
+                       class="inline-flex items-center gap-2 px-8 py-3 rounded-full gold-button text-sm uppercase font-semibold">
+                        <i class="fa-regular fa-calendar-check"></i>
+                        <span>Book a live session with Calee</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-cosmic-700/40 bg-cosmic-900/90 py-6 text-center text-xs text-slate-500 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 space-y-2">
+            <p>© Calee's Healing & Tarot Guidance. All rights reserved.</p>
+            <p class="max-w-xl mx-auto text-slate-600">
+                Disclaimer: Tarot readings are intended solely for personal reflection, spiritual guidance, and self-support. They do not predict the future or replace professional legal, financial, or medical advice.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        /* ===================================================================
+           EASY PRICING & PAYMENT LINK CONFIGURATION
+           Edit these variables whenever you wish to update your prices or Stripe links.
+           =================================================================== */
+        const PRICE_3CARD = 3;
+        const PRICE_LARGE = 7;
+
+        // Paste your actual payment link URLs between the quotes when ready!
+        const PAYMENT_LINK_3CARD = "PAYMENT_LINK_3CARD"; 
+        const PAYMENT_LINK_LARGE = "PAYMENT_LINK_LARGE"; 
+
+        /* ===================================================================
+           TAROT CARD DATASET (Reflective & Self-Support Focused)
+           =================================================================== */
+        const TAROT_DECK = [
+            {
+                name: "The Fool",
+                icon: "🌱",
+                meaning: "Embrace fresh beginnings with an open heart. Trust in yourself and step forward with curiosity rather than fear."
+            },
+            {
+                name: "The Magician",
+                icon: "🪄",
+                meaning: "You already possess the inner tools and resourcefulness needed to bring your goals into reality."
+            },
+            {
+                name: "The High Priestess",
+                icon: "🌙",
+                meaning: "Silence the outer noise and listen closely to your intuition. The answers you seek are already within."
+            },
+            {
+                name: "The Empress",
+                icon: "🌸",
+                meaning: "Nurture yourself and your environment. Allow space for creativity, comfort, and gentle growth."
+            },
+            {
+                name: "The Emperor",
+                icon: "👑",
+                meaning: "Establish healthy boundaries and thoughtful structure in your daily life to cultivate stability."
+            },
+            {
+                name: "The Hierophant",
+                icon: "📜",
+                meaning: "Reflect on core values and wisdom from past experience. Seek learning that grounds and aligns with your truth."
+            },
+            {
+                name: "The Lovers",
+                icon: "💖",
+                meaning: "Focus on alignment, harmony, and decisions that honor both your values and authentic connections."
+            },
+            {
+                name: "The Chariot",
+                icon: "🐎",
+                meaning: "Maintain focused intent and self-discipline. Move forward with quiet confidence and determination."
+            },
+            {
+                name: "Strength",
+                icon: "🦁",
+                meaning: "True strength lies in patience, compassion, and gentleness—especially towards yourself in challenging times."
+            },
+            {
+                name: "The Hermit",
+                icon: "🕯️",
+                meaning: "Take time for quiet introspection. Stepping back allows you to clarify your perspective and replenish your energy."
+            },
+            {
+                name: "Wheel of Fortune",
+                icon: "🎡",
+                meaning: "Life moves in natural cycles. Focus on what you can control while accepting the natural ebb and flow of life."
+            },
+            {
+                name: "Justice",
+                icon: "⚖️",
+                meaning: "Strive for balance, honesty, and fairness in your choices. Own your actions and honor your truth."
+            },
+            {
+                name: "The Hanged Man",
+                icon: "🦇",
+                meaning: "Pause and look at things from a new angle. Surrendering the need to rush reveals valuable clarity."
+            },
+            {
+                name: "Death (Renewal)",
+                icon: "🦋",
+                meaning: "A natural ending makes space for a fresh start. Release what no longer serves your emotional wellbeing."
+            },
+            {
+                name: "Temperance",
+                icon: "🏺",
+                meaning: "Seek moderation, inner peace, and equilibrium. Balance your energy and take a calm, deliberate path."
+            },
+            {
+                name: "The Star",
+                icon: "⭐",
+                meaning: "Hope, healing, and quiet optimism surround you. Trust that calm and renewal are finding their way to you."
+            },
+            {
+                name: "The Moon",
+                icon: "🐺",
+                meaning: "Honor feelings that are under the surface. It is okay not to have full clarity right now; take simple, mindful steps."
+            },
+            {
+                name: "The Sun",
+                icon: "☀️",
+                meaning: "Vitality, warmth, and joy. Celebrate your progress and let your authentic self shine brightly."
+            },
+            {
+                name: "Judgement (Awakening)",
+                icon: "🔔",
+                meaning: "A time for self-reflection and recognizing how far you've come. Forgive past mistakes and step into a clearer purpose."
+            },
+            {
+                name: "The World",
+                icon: "🌍",
+                meaning: "Wholeness and completion. Take a moment to acknowledge your journey, growth, and achievements."
+            }
+        ];
+
+        /* ===================================================================
+           APP STATE MANAGEMENT & LOCAL STORAGE LOGIC
+           =================================================================== */
+        let currentSpreadCards = [];
+        let flippedCount = 0;
+
+        window.onload = function() {
+            // Update pricing DOM displays from JS constants
+            document.querySelectorAll('.price-3card-display').forEach(el => el.textContent = PRICE_3CARD);
+            document.querySelectorAll('.price-large-display').forEach(el => el.textContent = PRICE_LARGE);
+
+            // Check if daily pull was already used today
+            checkDailyLimitStatus();
+        };
+
+        function getTodayDateString() {
+            const d = new Date();
+            return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+        }
+
+        function checkDailyLimitStatus() {
+            const lastPullDate = localStorage.getItem('calee_tarot_last_daily_date');
+            const today = getTodayDateString();
+
+            const dailyBtn = document.getElementById('btnDailyPull');
+            const notice = document.getElementById('dailyUsedNotice');
+
+            if (lastPullDate === today) {
+                dailyBtn.disabled = true;
+                dailyBtn.classList.remove('gold-button');
+                dailyBtn.classList.add('bg-cosmic-700', 'text-slate-500', 'cursor-not-allowed');
+                dailyBtn.textContent = "Daily Card Already Drawn";
+                notice.classList.remove('hidden');
+            }
+        }
+
+        /* ===================================================================
+           PAYMENT REDIRECT HANDLER
+           =================================================================== */
+        function handlePayment(type) {
+            let link = type === '3card' ? PAYMENT_LINK_3CARD : PAYMENT_LINK_LARGE;
+            let spreadName = type === '3card' ? "3-Card Mind, Body & Spirit Spread" : "5-Card Deep Clarity Spread";
+            
+            // Check if user has updated placeholder link
+            if (!link || link.startsWith("PAYMENT_LINK")) {
+                alert(`Thank you for choosing the ${spreadName}!\n\n(Payment link setup: Replace '${link}' with your Stripe link in the code to process real payments.)`);
+                // For demonstration/testing: launches spread directly if link not configured yet
+                startSpread(type);
+            } else {
+                window.open(link, '_blank');
+            }
+        }
+
+        /* ===================================================================
+           SPREAD GENERATION & DISPLAY LOGIC
+           =================================================================== */
+        function startSpread(type) {
+            // If free daily, record in localStorage
+            if (type === 'daily') {
+                localStorage.setItem('calee_tarot_last_daily_date', getTodayDateString());
+                checkDailyLimitStatus();
+            }
+
+            let cardCount = 1;
+            let title = "Daily Reflection";
+            let positions = ["Daily Focus"];
+
+            if (type === '3card') {
+                cardCount = 3;
+                title = "Mind, Body & Spirit Reading";
+                positions = ["Mind (Current Thought)", "Body (Physical/Action)", "Spirit (Inner Wisdom)"];
+            } else if (type === 'large') {
+                cardCount = 5;
+                title = "Deep Clarity Journey";
+                positions = ["Root Context", "Current Obstacle", "Hidden Strength", "Immediate Focus", "Empowered Wisdom"];
+            }
+
+            document.getElementById('spreadTitle').textContent = title;
+            
+            // Randomly select unique cards
+            const shuffled = [...TAROT_DECK].sort(() => 0.5 - Math.random());
+            currentSpreadCards = shuffled.slice(0, cardCount).map((card, idx) => ({
+                ...card,
+                positionLabel: positions[idx] || `Position ${idx + 1}`
+            }));
+
+            flippedCount = 0;
+            renderCards();
+
+            // Reveal reading section and scroll into view smoothly
+            const readingSection = document.getElementById('readingSection');
+            readingSection.classList.remove('hidden');
+            document.getElementById('interpretationBox').classList.add('hidden');
+            readingSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function renderCards() {
+            const grid = document.getElementById('cardsGrid');
+            grid.innerHTML = '';
+
+            currentSpreadCards.forEach((card, index) => {
+                const cardWrapper = document.createElement('div');
+                cardWrapper.className = 'flex flex-col items-center';
+
+                cardWrapper.innerHTML = `
+                    <div class="text-xs text-cosmic-softViolet font-medium mb-2 text-center uppercase tracking-wider">
+                        ${card.positionLabel}
+                    </div>
+                    <div class="card-container w-44 h-72">
+                        <div class="card-inner" id="card-${index}" onclick="flipCard(${index})">
+                            <!-- Card Back -->
+                            <div class="card-back sacred-pattern p-3 flex flex-col justify-between">
+                                <div class="w-full h-full border border-cosmic-accent/30 rounded-lg flex flex-col items-center justify-center p-2">
+                                    <div class="w-12 h-12 rounded-full border border-cosmic-accent/40 flex items-center justify-center text-cosmic-accent text-xl">
+                                        ✨
+                                    </div>
+                                    <span class="text-[10px] text-cosmic-accent/70 uppercase tracking-widest mt-3">Click to Flip</span>
+                                </div>
+                            </div>
+                            <!-- Card Front -->
+                            <div class="card-front p-4 justify-between">
+                                <div class="text-xs text-cosmic-accent font-semibold tracking-wide uppercase border-b border-cosmic-700 w-full pb-1">
+                                    ${card.name}
+                                </div>
+                                <div class="text-5xl my-4 transform transition-transform hover:scale-110">
+                                    ${card.icon}
+                                </div>
+                                <div class="text-xs text-slate-300 leading-snug overflow-y-auto max-h-28 text-left bg-cosmic-900/60 p-2.5 rounded-lg border border-cosmic-700/50">
+                                    ${card.meaning}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(cardWrapper);
+            });
+        }
+
+        function flipCard(index) {
+            const cardEl = document.getElementById(`card-${index}`);
+            if (!cardEl.classList.contains('flipped')) {
+                cardEl.classList.add('flipped');
+                flippedCount++;
+
+                // If all cards revealed, show summary box
+                if (flippedCount === currentSpreadCards.length) {
+                    setTimeout(showInterpretationSummary, 600);
+                }
+            }
+        }
+
+        function showInterpretationSummary() {
+            const box = document.getElementById('interpretationBox');
+            const content = document.getElementById('interpretationContent');
+            
+            let html = `<p class="italic text-slate-400 mb-3">Take a deep breath and sit with these insights. How do these messages resonate with your current life situation?</p><ul class="space-y-2">`;
+            
+            currentSpreadCards.forEach(card => {
+                html += `
+                    <li class="bg-cosmic-800/80 p-3 rounded-xl border border-cosmic-700/60">
+                        <strong class="text-cosmic-accent">${card.positionLabel} (${card.name}):</strong> 
+                        <span class="text-slate-300">${card.meaning}</span>
+                    </li>
+                `;
+            });
+            
+            html += `</ul>`;
+            content.innerHTML = html;
+            box.classList.remove('hidden');
+        }
+
+        function resetReading() {
+            document.getElementById('readingSection').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
